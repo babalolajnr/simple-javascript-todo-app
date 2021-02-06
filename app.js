@@ -4,23 +4,30 @@ const tasks = document.getElementById('tasks')
 
 submitButton.addEventListener('click', () => {
     let latestTodo = newTodo.value
-    let latestTodoSlug = string_to_slug(latestTodo)
 
-    //check if to-do exists
-    let exists = document.querySelector('[id="' + latestTodoSlug + '"]')
-
-    if (exists != null) {
-        alert('Todo Exists')
+    if (latestTodo == '') {
+        alert("Todo can't be empty Oga")
     } else {
-        tasks.innerHTML += '<tr id="' + latestTodoSlug + '">' +
-            '<td>' + latestTodo + '</td>' +
-            '<td>' +
-            '<button type="button" class="btn btn-warning" onclick="editItem(\'' + latestTodoSlug + '\')">Edit</button>' +
-            '<span class="px-1"></span><button type="button" class="btn btn-danger" onclick="removeItem(\'' + latestTodoSlug + '\')">Delete</button></td>' +
-            '</tr>'
 
-        newTodo.value = ''
+        let latestTodoSlug = string_to_slug(latestTodo)
+
+        //check if to-do exists
+        let exists = document.querySelector('[id="' + latestTodoSlug + '"]')
+
+        if (exists != null) {
+            alert('Todo Exists')
+        } else {
+            tasks.innerHTML += '<tr id="' + latestTodoSlug + '">' +
+                '<td>' + latestTodo + '</td>' +
+                '<td>' +
+                '<button type="button" class="btn btn-warning" onclick="editItem(\'' + latestTodoSlug + '\')">Edit</button>' +
+                '<span class="px-1"></span><button type="button" class="btn btn-danger" onclick="removeItem(\'' + latestTodoSlug + '\')">Delete</button></td>' +
+                '</tr>'
+
+            newTodo.value = ''
+        }
     }
+
 
 
 })
@@ -49,7 +56,7 @@ function editItem(item) {
     let todoForm = submitButton.parentNode
 
     todoForm.insertBefore(span, submitButton)
-    
+
     //set the attribute of the update button to have a dynamic id according to the name of the task
     span.setAttribute('id', `${item}-update`)
     span.innerHTML += '<button type="button" class="btn btn-info" onclick="updateItem(\'' + item + '\')">Update</button>'
