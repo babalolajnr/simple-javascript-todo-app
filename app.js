@@ -73,7 +73,7 @@ function updateItem(item) {
 
 }
 
-//This function is to generate a slug that I am going to use to uniquely identify the todos
+//Convert string to slug
 function string_to_slug(str) {
     str = str.replace(/^\s+|\s+$/g, ''); // trim
     str = str.toLowerCase();
